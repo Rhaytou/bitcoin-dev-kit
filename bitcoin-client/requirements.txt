@@ -1,0 +1,13 @@
+requests
+requests[socks]
+
+mnemonic==0.21
+pycryptodome>=3.17
+coincurve>=18.0.0
+python-bitcoinlib>=0.12.2
+
+
+
+
+
+

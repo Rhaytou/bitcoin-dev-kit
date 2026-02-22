@@ -1,0 +1,67 @@
+services:
+  node-load-balancer_service:
+    container_name: node-load-balancer_container
+    build:
+      context: ./dockerfile/node-load-balancer
+      dockerfile: Dockerfile
+    depends_on:
+      - bitcoin-node_service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./dockerfile/node-load-balancer/nginx.conf:/etc/nginx/nginx.conf:ro
+    environment:
+      - TZ=Africa/Casablanca
+    network_mode: host
+    privileged: true
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  bitcoin-node_service:
+    container_name: bitcoin-node_container
+    build:
+      context: ./dockerfile/bitcoin-node
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${UID:-1000}
+        GROUP_ID: ${GID:-1000}
+    ports:
+      - "8332:8332" # mainnet RPC (if rpcport=8332)
+      - "8333:8333" # mainnet P2P
+      - "18332:18332" # testnet3 RPC (if used)
+      - "18333:18333" # testnet3 P2P
+      - "48332:48332" # testnet4 RPC
+      - "48333:48333" # testnet4 P2P
+      - "18443:18443" # Regtest RPC
+      - "18444:18444" # Regtest P2P
+      - "38332:38332" # signet RPC (if used)
+      - "38333:38333" # signet P2P
+    volumes:
+      - bitcoin-node_data:/root/.bitcoin
+      - ./dockerfile/bitcoin-node/bitcoin.conf:/bitcoin/bitcoin-30.0/bitcoin.conf:ro
+    environment:
+      - TZ=Africa/Casablanca
+    network_mode: host
+    privileged: true
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+volumes:
+  bitcoin-node_data:
+
+
+
+
+
