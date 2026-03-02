@@ -6,8 +6,8 @@
 # Place this script in the root of your project and run: bash dump_project.sh
 # =============================================================================
 
-OUTPUT_FILE="project_dump.txt"
-SCRIPT_NAME="dump_project.sh"
+OUTPUT_FILE="bitcoin-dev-kit.txt"
+SCRIPT_NAME="project_dump.sh"
 
 # Folders and patterns to ignore
 IGNORE_DIRS=("node_modules" "__pycache__" ".git" "envName" ".mypy_cache" ".pytest_cache" "dist" "build" ".next" ".venv"  ".env" "package-lock.json" "bitcoin-30.2")

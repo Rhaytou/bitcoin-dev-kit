@@ -1,5 +1,5 @@
 /* ------------------- */
-/* Reanisialization */
+/* Reinitialisation */
 /* ------------------- */
 *, *::before, *::after{
     box-sizing: border-box;
@@ -53,7 +53,6 @@ a:hover,
 a:active,
 a:focus {
   text-decoration: none;
-  /*color: inherit;*/
   outline: none;
 }
 
